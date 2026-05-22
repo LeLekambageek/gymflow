@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # ========== REDIRECTION: / → /public/ ==========
+    # Si la requête n'est pas un fichier existant
+    # et n'est pas un dossier existant
+    # et ne pointe pas vers public/
+    # Alors on redirige vers public/
+    
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # ========== DANS LE DOSSIER PUBLIC: ==========
+    # Rediriger les requêtes vers index.php pour le routage
+    
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>

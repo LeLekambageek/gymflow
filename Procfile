@@ -1,0 +1,2 @@
+web: php -d display_errors=stdout -d error_reporting=E_ALL -S 0.0.0.0:${PORT:-8080} -t public
+release: php artisan migrate --force
