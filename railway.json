@@ -1,6 +1,6 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "deploy": {
-    "startCommand": "php -d display_errors=stdout -d error_reporting=E_ALL -S 0.0.0.0:${PORT:-8080} -t public"
+    "startCommand": "php artisan migrate --force && php artisan optimize:clear && php artisan serve --host=0.0.0.0 --port=$PORT"
   }
 }
