@@ -9,21 +9,23 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Subscription extends Model
 {
+
     protected $fillable = [
-        'member_id',
-        'subscription_plan_id',
-        'start_date',
-        'end_date',
-        'status',
-        'amount_paid',
-        'payment_method',
-        'notes',
+        'member_id',             
+        'subscription_plan_id',   
+        'start_date',              
+        'end_date',                
+        'status',                 
+        'amount_paid',              
+        'payment_method',        
+        'notes',                  
     ];
 
+ 
     protected $casts = [
-        'start_date' => 'date',
-        'end_date' => 'date',
-        'amount_paid' => 'decimal:2',
+        'start_date' => 'date',  
+        'end_date' => 'date',      
+        'amount_paid' => 'decimal:2', 
     ];
 
     public function member(): BelongsTo
@@ -31,10 +33,12 @@ class Subscription extends Model
         return $this->belongsTo(Member::class);
     }
 
+
     public function plan(): BelongsTo
     {
         return $this->belongsTo(SubscriptionPlan::class, 'subscription_plan_id');
     }
+
 
     public function payments(): HasMany
     {

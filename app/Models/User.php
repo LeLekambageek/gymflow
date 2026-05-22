@@ -13,29 +13,32 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Les colonnes qu'on peut remplir directement lors de la création/modification
+     * (par sécurité, on liste explicitement ce qui peut être modifié)
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
+        'name',             
+        'email',        
+        'password',         
+        'role',             
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Les colonnes sensibles à ne jamais envoyer en réponse
+     * (on les cache pour éviter de leaker des données sensibles)
      *
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password',      
+        'remember_token', 
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Définir comment les colonnes doivent être traitées lors des requêtes
+     * (exemple: convertir les dates en objets DateTime)
      *
      * @return array<string, string>
      */
@@ -43,7 +46,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password' => 'hashed',      
         ];
     }
 }

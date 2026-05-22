@@ -7,15 +7,17 @@ use Illuminate\Http\Request;
 
 class CheckRole
 {
+    
     public function handle(Request $request, Closure $next, string $role)
     {
         if (!auth()->check()) {
             return redirect()->route('login');
         }
 
+
         if (auth()->user()->role !== $role && $role !== 'any') {
-            // Le gérant essaie d'accéder à une page propriétaire
-            abort(403, 'Accès réservé au propriétaire.');
+            //L'utilisateur n'a pas le bon rôle
+            abort(403, 'Accès réservé au ' . $role);
         }
 
         return $next($request);

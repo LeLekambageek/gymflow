@@ -9,14 +9,17 @@ class CheckAdmin
 {
     public function handle(Request $request, Closure $next)
     {
+        
         if (!auth()->check()) {
             return redirect()->route('login');
         }
 
+        
         if (auth()->user()->role !== 'admin') {
-            abort(403, 'Accès réservé aux administrateurs.');
+            abort(403, 'Accès réservé aux administrateurs.');  // Non → bloquer
         }
 
+        
         return $next($request);
     }
 }

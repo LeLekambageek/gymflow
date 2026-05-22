@@ -9,35 +9,39 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Member extends Model
 {
+
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'birth_date',
-        'address',
-        'emergency_contact',
-        'emergency_phone',
-        'status',
-        'photo',
-        'qr_code',
+        'first_name',        
+        'last_name',           
+        'email',                
+        'phone',            
+        'birth_date',          
+        'address',              
+        'emergency_contact',    
+        'emergency_phone',      
+        'status',               
+        'photo',                
+        'qr_code',            
     ];
 
+
     protected $casts = [
-        'birth_date' => 'date',
+        'birth_date' => 'date',  // Convertir en objet DateTime
     ];
+
 
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class);
     }
 
+ 
     public function activeSubscription(): HasOne
     {
         return $this->hasOne(Subscription::class)
             ->where('status', 'active')
             ->where('end_date', '>=', date('Y-m-d'))
-            ->latestOfMany('end_date');
+            ->latestOfMany('end_date'); 
     }
 
     public function payments(): HasMany
